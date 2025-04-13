@@ -1,0 +1,8 @@
+L   Z   H
+L  Z Z  H
+L Z   Z  H
+L      Z H
+L     Z  H
+L    Z   H
+L   Z    H
+L  ZZZZZ H

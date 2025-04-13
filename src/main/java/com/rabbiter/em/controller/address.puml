@@ -1,0 +1,207 @@
+@startuml
+
+' 实体类
+
+' 管理员类
+class SysUser {
+    - id: bigint
+    - username: String
+    - password: String
+    - nickname: String
+    - email: String
+    - phone: String
+    - address: String
+    - avatar_url: String
+    - role: String
+    + getId(): bigint
+    + setId(id: bigint): void
+    + getUsername(): String
+    + setUsername(username: String): void
+    + getPassword(): String
+    + setPassword(password: String): void
+    + getNickname(): String
+    + setNickname(nickname: String): void
+    + getEmail(): String
+    + setEmail(email: String): void
+    + getPhone(): String
+    + setPhone(phone: String): void
+    + getAddress(): String
+    + setAddress(address: String): void
+    + getAvatarUrl(): String
+    + setAvatarUrl(avatar_url: String): void
+    + getRole(): String
+    + setRole(role: String): void
+}
+
+' 商品分类类
+class Category {
+    - id: bigint
+    - name: String
+    + getId(): bigint
+    + setId(id: bigint): void
+    + getName(): String
+    + setName(name: String): void
+}
+
+' 商品类
+class Good {
+    - id: bigint
+    + getId(): bigint
+    + setId(id: bigint): void
+}
+
+' 商品规格类
+class GoodStandard {
+    - id: bigint
+    - name: String
+    - price: double
+    - stock: int
+    + getId(): bigint
+    + setId(id: bigint): void
+    + getName(): String
+    + setName(name: String): void
+    + getPrice(): double
+    + setPrice(price: double): void
+    + getStock(): int
+    + setStock(stock: int): void
+}
+
+' 图标类
+class Icon {
+    - id: bigint
+    - value: String
+    + getId(): bigint
+    + setId(id: bigint): void
+    + getValue(): String
+    + setValue(value: String): void
+}
+
+' 数据访问对象接口
+
+' 管理员数据访问接口
+interface SysUserDao {
+    + findById(id: bigint): SysUser
+    + findAll(): List<SysUser>
+}
+
+' 商品分类数据访问接口
+interface CategoryDao {
+    + findById(id: bigint): Category
+    + findAll(): List<Category>
+}
+
+' 商品数据访问接口
+interface GoodDao {
+    + findById(id: bigint): Good
+    + findAll(): List<Good>
+}
+
+' 商品规格数据访问接口
+interface GoodStandardDao {
+    + findById(id: bigint): GoodStandard
+    + findAll(): List<GoodStandard>
+}
+
+' 图标数据访问接口
+interface IconDao {
+    + findById(id: bigint): Icon
+    + findAll(): List<Icon>
+}
+
+' 服务类
+
+' 管理员服务类
+class SysUserService {
+    - sysUserDao: SysUserDao
+    + findById(id: bigint): SysUser
+    + findAll(): List<SysUser>
+}
+
+' 商品分类服务类
+class CategoryService {
+    - categoryDao: CategoryDao
+    + findById(id: bigint): Category
+    + findAll(): List<Category>
+}
+
+' 商品服务类
+class GoodService {
+    - goodDao: GoodDao
+    + findById(id: bigint): Good
+    + findAll(): List<Good>
+}
+
+' 商品规格服务类
+class GoodStandardService {
+    - goodStandardDao: GoodStandardDao
+    + findById(id: bigint): GoodStandard
+    + findAll(): List<GoodStandard>
+}
+
+' 图标服务类
+class IconService {
+    - iconDao: IconDao
+    + findById(id: bigint): Icon
+    + findAll(): List<Icon>
+}
+
+' 控制器类
+
+' 管理员控制器类
+class SysUserController {
+    - sysUserService: SysUserService
+    + findById(id: bigint): Result
+    + findAll(): Result
+}
+
+' 商品分类控制器类
+class CategoryController {
+    - categoryService: CategoryService
+    + findById(id: bigint): Result
+    + findAll(): Result
+}
+
+' 商品控制器类
+class GoodController {
+    - goodService: GoodService
+    + findById(id: bigint): Result
+    + findAll(): Result
+}
+
+' 商品规格控制器类
+class GoodStandardController {
+    - goodStandardService: GoodStandardService
+    + findById(id: bigint): Result
+    + findAll(): Result
+}
+
+' 图标控制器类
+class IconController {
+    - iconService: IconService
+    + findById(id: bigint): Result
+    + findAll(): Result
+}
+
+' 关联关系
+
+SysUserController --> SysUserService : 依赖
+SysUserService --> SysUserDao : 依赖
+SysUserDao --> SysUser : 关联
+
+CategoryController --> CategoryService : 依赖
+CategoryService --> CategoryDao : 依赖
+CategoryDao --> Category : 关联
+
+GoodController --> GoodService : 依赖
+GoodService --> GoodDao : 依赖
+GoodDao --> Good : 关联
+
+GoodStandardController --> GoodStandardService : 依赖
+GoodStandardService --> GoodStandardDao : 依赖
+GoodStandardDao --> GoodStandard : 关联
+
+IconController --> IconService : 依赖
+IconService --> IconDao : 依赖
+IconDao --> Icon : 关联
+
+@enduml
